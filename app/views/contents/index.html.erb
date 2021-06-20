@@ -1,0 +1,25 @@
+<body>
+  <h2 class="topic">オンラインで踊る時代<br>自宅で気軽に</h2>
+    <div class="main">
+      <div class="first-view">
+      <%= image_tag 'IMG_8397.jpeg', class: 'first-view-image' %>
+      </div>
+    </div>
+    
+  <div class="movie-list">
+    <h3> 動画一覧 </h3>
+    <div class="movie-detail">
+      <% if user_signed_in? %>
+       <% @contents.each do |content| %>
+         <%= render partial:"content", locals:{content: content} %>
+       <% end %>   
+      <% else %>
+        <p>
+         マイユーザー登録お願いいたします。
+         </p>
+      <% end %>
+      <%= paginate(@contents) %>
+    </div>
+  </div>
+</body>
+

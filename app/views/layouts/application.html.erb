@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Original</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="top-name">
+        <h2 class="title">
+          <%= link_to "☆Dance Smile☆", "/contents", class: "get" %>
+        </h2>
+      </div>
+      <div class="menu-content">
+      <% if user_signed_in? %>
+        <ul class="menu-lists">
+          <li class="list">
+            <%= link_to "マイページ", "/users/#{current_user.id}"%>
+          </li>
+          <li class="list">
+            <%= link_to "画像投稿する", "/contents/new", class: "post" %>
+          </li>
+          <li class="list">
+            <%= link_to "動画投稿する", "/videos/new/", class:"post" %>
+          </li>
+          <li class="list">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+        </ul>
+    <% else %>
+        <ul class="menu-lists">
+          <li class="list">
+          <%= link_to "ログイン", new_user_session_path, class: "post" %>
+          </li>
+          <li class="list">
+          <%= link_to "新規登録", new_user_registration_path, class: "post" %>
+          </li>
+        </ul>
+      <% end %>
+      </div>
+    </header>
+  <%= yield %>
+  </body>
+</html>

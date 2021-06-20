@@ -1,0 +1,36 @@
+<div class="content-post" style="background-image: url(<%= @content.images %>);">
+  <div class="name-tag">
+    <span class="user-name">【<%=@content.user.nickname%>】</span>
+    <span class="text"><%= @content.text%></span>
+  </div>
+  <div class="more">
+    <ul class="list">
+      <% if user_signed_in? && current_user.id == @content.user_id %>
+      <li class="option">
+        <%= link_to "削除", "/contents/#{@content.id}", method: :delete %>
+      </li>
+      <li class="option">
+        <%= link_to "編集",edit_content_path(@content.id), method: :get %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <% if user_signed_in? %>
+    <%= form_with(model: [@content,@comment], local: true) do |form| %>
+      <%= form.text_area :text, placeholder: "テキスト", class:"comment_form" %>
+      <%= form.submit "SEND", class:"send"%>
+    <% end %>
+  <% else %>
+    <p> 登録してね </p>
+  <% end %>
+</div>
+<div class="comments">
+  <h4>コメント一覧</h4>
+   <div class="comments-text">
+    <% @comments.each do |comment| %>
+      <p><%= comment.text %></p>
+    <% end %>
+  </div>
+</div>

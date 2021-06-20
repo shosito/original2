@@ -1,0 +1,21 @@
+<div class="content-post" style="background-image: url(<%= content.images %>);">
+  <div class="name-tag">
+    <span class="user-name">【<%=content.user.nickname%>】</span>
+    <span class="text"><%= content.text%></span>
+  </div>
+  <div class="more">
+    <ul class="list">
+      <li>
+        <%= link_to "詳細", content_path(content.id), method: :get %>
+      </li>
+      <% if user_signed_in? && current_user.id == content.user_id %>
+      <li class="option">
+        <%= link_to "削除", "/contents/#{content.id}", method: :delete %>
+      </li>
+      <li class="option">
+        <%= link_to "編集",edit_content_path(content.id), method: :get %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
