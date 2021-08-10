@@ -1,0 +1,10 @@
+<div class="video-main">
+  <h3>動画一覧</>
+  <div class="video-lists">
+    <% if @video.video.attached? %>
+      <span><%= @video.title %></span>
+      <p><%= @video.introduction %></p>
+      <video src="<%= rails_blob_path(@video.video) %>" type="video/mp4" controls></video>
+    <% end %>
+  </div>
+</div>

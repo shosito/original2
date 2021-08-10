@@ -1,0 +1,55 @@
+<div class="top-main">
+  <div class="movie-list">
+    <h3> 写真一覧 </h3>
+    <div class="movie-detail">
+      <% if user_signed_in? %>
+       <% @contents.each do |content| %>
+        <div class="content-post" style="background-image: url(<%= content.images %>);">
+          <div class="name-tag">
+            <span class="user-name">【<%=content.user.nickname%>】</span>
+            <span class="text"><%= content.text%></span>
+          </div>
+          <div class="more">
+            <ul class="list">
+              <li>
+                <%= link_to "詳細", content_path(content.id), method: :get %>
+              </li>
+              <% if user_signed_in? && current_user.id == content.user_id %>
+              <li class="option">
+                <%= link_to "削除", "/contents/#{content.id}", method: :delete %>
+              </li>
+              <li class="option">
+                <%= link_to "編集",edit_content_path(content.id), method: :get %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+       <% end %> 
+      <%= paginate(@contents) %>
+      <% else %>
+        <p>
+        マイユーザー登録お願いいたします。
+        </p>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="post-movie">
+    <h3>動画一覧</h3>
+    <div class="post-movie-detail">
+      <% @videos.each do |video| %>
+          <% if video.video.attached? %>
+            <div class="video-more">
+              <span class="video-title">【<%= video.title %>】</span>
+              <span class="video-introduction"><%= video.introduction %></span>
+            </div>
+            <div class="movie-data">
+              <video src="<%= rails_blob_path(video.video) %>" type="video/mp4" controls></video>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+    <%= paginate(@videos) %>
+  </div>
+</div>

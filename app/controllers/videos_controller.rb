@@ -4,11 +4,15 @@ class VideosController < ApplicationController
     end
     
     def create
-        @video = Video.create(titele: video_parmas[:title],  introduction: video_params[:introduction])
+        @video = Video.create(video_params)
+    end
+    
+    def show
+        @video = Video.find(params[:id])
     end
     
     private
     def video_params
-        params.require(:video).permit(:introduction,:titele, :video)
+        params.require(:video).permit(:introduction,:title, :video).merge(user_id: current_user.id)
     end
 end
