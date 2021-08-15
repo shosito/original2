@@ -4,4 +4,5 @@ class UsersController < ApplicationController
         @nickname = current_user.nickname
         @contents = Content.where(user_id: current_user.id)
     end
+    
 end

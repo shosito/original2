@@ -1,9 +1,9 @@
-<h3>とりあえず、エラー出るので記述のみ</h3>
+<h3>動画投稿</h3>
 <div class="form">
   <%= form_with(model: @video, local: true) do |form| %>
     <%= form.text_field :title, placeholder:"title" %>
     <%= form.text_area :introduction, placeholder:"introduction" %>
-    <%= form.file_field :video, class:"video-send" %>
+    <%= form.file_field :video_data, :accept => 'video/*', class:"video-send" %>
     <%= form.submit "SEND",class:"send" %>
   <% end %>
 </div>

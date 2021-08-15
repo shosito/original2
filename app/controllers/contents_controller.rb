@@ -11,7 +11,7 @@ class ContentsController < ApplicationController
     end
     
     def create
-        Content.create(name: content_params[:name], text: content_params[:text], images: content_params[:images], user_id: current_user.id)
+        Content.create(content_params)
     end
     
     def destroy
@@ -37,7 +37,7 @@ class ContentsController < ApplicationController
     
     private
     def content_params
-      params.require(:content).permit(:name, :text, :images)
+      params.require(:content).permit(:name, :text, :images).merge(user_id: current_user.id)
     end
     
     def set_content

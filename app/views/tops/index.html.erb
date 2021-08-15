@@ -39,15 +39,27 @@
     <h3>動画一覧</h3>
     <div class="post-movie-detail">
       <% @videos.each do |video| %>
-          <% if video.video.attached? %>
+          <div class="video-main">
             <div class="video-more">
               <span class="video-title">【<%= video.title %>】</span>
               <span class="video-introduction"><%= video.introduction %></span>
+            </div>   
+            <div class="more">
+              <ul class="list">
+                <li>
+                  <%= link_to "削除", video_path(video.id), method: :delete %>
+                </li>
+                <li>
+                  <%= link_to "編集", edit_video_path(video.id) %>
+                </li>
+              </ul>
             </div>
-            <div class="movie-data">
-              <video src="<%= rails_blob_path(video.video) %>" type="video/mp4" controls></video>
+            <div class="video-list">
+              <%= link_to video.video_data_url.to_s do %>
+               <%= video_tag(video.video_data.to_s,:controls => true)%>
+              <% end %>
             </div>
-          <% end %>
+          </div>
       <% end %>
     </div>
     <%= paginate(@videos) %>

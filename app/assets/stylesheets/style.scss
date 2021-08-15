@@ -117,6 +117,15 @@ textarea {
     padding: 10px;
 }
 
+
+.image {
+    width: 100%;
+    height: 30px;
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+}
+    
 .send {
     width: 50%;
     height: 30px;
@@ -177,14 +186,14 @@ h4,.comments-text {
     align-text: center;
 }
 
-.video-more {
-    margin: 5px auto;
-    align-text: center;
-}
-
 .post-movie-detail {
     margin: 5px auto;
     background-color: orange;
+}
+
+.video-main {
+    margin: 5px auto;
+    align-text: center;
 }
 
 .movie-data,.video-title {
